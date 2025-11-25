@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model JiraConfig {
+  id        Int      @id @default(autoincrement())
+  domainUrl String   @map("domain_url") @db.VarChar(255)
+  apiKey    String   @map("api_key") @db.Text
+  email     String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("jira_config")
+}
+
+model OpenAiConfig {
+  id        Int      @id @default(autoincrement())
+  apiKey    String   @map("api_key") @db.Text
+  modelName String   @map("model_name") @db.VarChar(100) @default("gpt-4")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("openai_config")
+}
+
+model GeneratedTestcase {
+  id             Int      @id @default(autoincrement())
+  storyId        String   @map("story_id") @db.VarChar(50)
+  testCaseId     String   @map("test_case_id") @db.VarChar(100)
+  name           String   @db.VarChar(255)
+  description    String   @db.Text
+  type           String   @db.VarChar(50)
+  steps          String   @db.Text
+  expectedResult String   @map("expected_result") @db.Text
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("generated_testcases")
+}

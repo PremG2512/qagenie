@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+# Local data files (contains sensitive API keys and test data)
+data/
+*.json
+
+# Test files
+test-*.js
+
+# Temporary files
+*.tmp
+*.temp
